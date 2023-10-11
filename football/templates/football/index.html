@@ -3,6 +3,6 @@
     <body>
         <h1>Football App</h1>
         <p>Welcome to our first Django web application, where we discuss about football</p>
-        <p>For now, we have created some football teams, using the admin page.</p>
+        <p>For now, we have created some <a href="{% url 'football:teams' %}">football teams</a>, using the <a href="{% url 'admin:index' %}">admin page</a>.</p>
     </body>
 </html>

@@ -1,0 +1,13 @@
+<html>
+    <head></head>
+    <body>
+        <h1>Show Teams</h1>
+        <p>These are the teams that are currently in our database</p>
+        <ul>
+            {% for team in list_of_teams %}
+            <li>{{team}}</li>
+            {% endfor %}
+        </ul>
+        <p>Go back to the <a href="{% url 'football:home' %}">homepage</a></p>
+    </body>
+</html>
