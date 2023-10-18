@@ -1,0 +1,13 @@
+<html>
+    <head></head>
+    <body>
+        <h1>Show Players</h1>
+        <p>These are the players from {{team}} that are currently in our database</p>
+        <ul>
+            {% for player in list_of_players %}
+            <li>{{player}}</li>
+            {% endfor %}
+        </ul>
+        <p>Go back to the <a href="{% url 'football:home' %}">homepage</a></p>
+    </body>
+</html>
