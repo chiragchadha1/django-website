@@ -5,7 +5,7 @@
         <p>These are the teams that are currently in our database</p>
         <ul>
             {% for team in list_of_teams %}
-            <li>{{team}}</li>
+            <li><a href="{% url 'football:teamPlayers' team.id %}">{{team}}</a></li>
             {% endfor %}
         </ul>
         <p>Go back to the <a href="{% url 'football:home' %}">homepage</a></p>
