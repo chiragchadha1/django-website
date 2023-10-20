@@ -4,5 +4,13 @@
         <h1>Football App</h1>
         <p>Welcome to our first Django web application, where we discuss about football</p>
         <p>For now, we have created some <a href="{% url 'football:teams' %}">football teams</a>, using the <a href="{% url 'admin:index' %}">admin page</a>.</p>
+
+        <p>Please insert two numbers and press the button!</p>
+        <form action="{% url 'football:gcd' %}" method="POST">
+            {% csrf_token %}
+            <p>First number: <input type="number" name="first"></p>
+            <p>Second number: <input type="number" name="second"></p>
+            <button>Calculate GCD</button>
+        </form>
     </body>
 </html>

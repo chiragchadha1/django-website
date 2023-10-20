@@ -7,5 +7,6 @@ urlpatterns = [
 	path('', views.home, name='home'), # we have to write a view called home
     path('teams/', views.teams, name='teams'),
     path('teams/manutd', views.manutd, name='manutd'),
-    path('teams/<int:teamID>', views.teamPlayers, name='teamPlayers')
+    path('teams/<int:teamID>', views.teamPlayers, name='teamPlayers'),
+    path('gcd/', views.gcd, name='gcd')
 ]
