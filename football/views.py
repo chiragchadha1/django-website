@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Team
+from .forms import TeamForm, PlayerForm
+
 # Create your views here.
 def home(request):
     return render(request, 'football/index.html')
@@ -19,7 +21,7 @@ def manutd(request):
 def teamPlayers(request, teamID):
     team_object = Team.objects.get(id = teamID)
     players_list = team_object.player_set.all()
-    context = {'list_of_players': players_list, 'team': team_object.name}
+    context = {'list_of_players': players_list, 'team_name': team_object.name}
     return render(request, 'football/showplayers.html', context)
 
 def gcd(request):
@@ -41,3 +43,36 @@ def calc_gcd(a, b):
     else:
         return calc_gcd(b, a % b)
 
+def chooseTeam(request):
+    team_id = int(request.POST.get('choose_team'))
+
+    team_object = Team.objects.get(id = team_id)
+
+    players_list = team_object.player_set.all()
+
+    context = {"list_of_players" : players_list, "team_name": team_object.name}
+
+    return render(request, 'football/showplayers.html', context)
+
+def addNewTeam(request):
+    if request.method != 'POST': # no data is submitted so create a blank form to insert
+        form = TeamForm()
+    else:
+        form = TeamForm(data=request.POST) # there is data submitted -> validate and store in DB
+        if form.is_valid():
+            form.save()
+            return redirect('football:teams')
+    context = {'form' : form}
+    return render(request, 'football/newteam.html', context)
+
+def addNewPlayer(request):
+    if request.method != 'POST':
+        form = PlayerForm()
+    else:
+        form = PlayerForm(data=request.POST)
+        if form.is_valid():
+            new_player = form.save()
+            team_id = new_player.team.id
+            return redirect('football:teamPlayers', teamID = team_id)
+    context = {'form' : form}
+    return render(request, 'football/newplayer.html', context)

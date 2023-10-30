@@ -8,6 +8,23 @@
             <li><a href="{% url 'football:teamPlayers' team.id %}">{{team}}</a></li>
             {% endfor %}
         </ul>
+        <p>You can add a new team from <a href="{% url 'football:addNewTeam'%}">here</a></p>
+         <!-- ALTERNATIVE -->
+         <p>I could select the team using a drop-down menu</p>
+         <form action="{% url 'football:chooseTeam' %}" method="POST">
+            {% csrf_token %}
+             <select name="chooose_team">
+                 {% for player in list_of_teams %}
+                     <option value="{{player.id}}">{{player}}</option>
+                 {% endfor %}
+             </select>
+
+             <p>Or with radio buttons</p>
+            {% for player in list_of_teams %}
+                <input type="radio" name="bad_submit" value="{{player.id}}">{{ player }} <br>
+            {% endfor %}
+             <button name="submit">Submit</button>
+         </form>
         <p>Go back to the <a href="{% url 'football:home' %}">homepage</a></p>
     </body>
 </html>

@@ -1,0 +1,12 @@
+<html>
+    <head></head>
+    <body>
+        <h1>New Player Form</h1>
+        <form action="{% url 'football:addNewPlayer' %}" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button name="submit">Add Player</button>
+        </form>
+        <p>Go back to the <a href="{% url 'football:home' %}">homepage</a></p>
+    </body>
+</html>
